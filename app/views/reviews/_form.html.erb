@@ -1,0 +1,32 @@
+<%= form_with(model: review, local: true, html: { class: 'needs-validation', novalidate: '' }) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> 禁止されている:</h2>
+      <ul>
+        <% review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :rating %>
+    <%= form.number_field :rating, class: 'form-control', min: 1, max: 5, required: true %>
+    <div class="invalid-feedback">
+      1から5の間で評価してください。
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :comment %>
+    <%= form.text_area :comment, class: 'form-control', rows: 5, required: true %>
+    <div class="invalid-feedback">
+      コメントを入力してください。
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
