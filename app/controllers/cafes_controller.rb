@@ -1,6 +1,6 @@
 class CafesController < ApplicationController
   def index
-    @cafes = Cafe.all
+    @cafes = Cafe.order(:name).paginate(page: params[:page], per_page: 10)
   end
 
   def new

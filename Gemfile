@@ -46,6 +46,7 @@ gem "bootstrap", "~> 4.6.0"
 gem "geocoder"
 gem "gmaps4rails"
 gem "webpacker"
+gem 'will_paginate', '~> 3.1'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
