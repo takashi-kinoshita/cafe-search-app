@@ -24,4 +24,25 @@
       </div>
     </div>
   </div>
+
+  <h3 class="mt-5">Location on Map</h3>
+  <div id="map"></div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function initMap() {
+      var myPlace = {lat: <%= @cafe.latitude %>, lng: <%= @cafe.longitude %>};
+      var map = new google.maps.Map(document.getElementById('map'), {zoom: 15, center: myPlace});
+      var marker = new google.maps.Marker({position: myPlace, map: map});
+    }
+
+    if (document.getElementById('map')) {
+      var script = document.createElement('script');
+      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA__TKlpHwteR_vPrQIpb18XURpKnqH_to&callback=initMap";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+  });
+</script>
