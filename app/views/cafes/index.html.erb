@@ -29,23 +29,23 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    function initMap() {
-      var centerLocation = {lat: 35.6895, lng: 139.6917};
-      var map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: centerLocation});
+  function initMap() {
+  var centerLocation = {lat: 35.6895, lng: 139.6917};
+  var map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: centerLocation});
 
-      <% @cafes.each do |cafe| %>
-        var cafeLocation = {lat: <%= cafe.latitude %>, lng: <%= cafe.longitude %>};
-        var marker = new google.maps.Marker({position: cafeLocation, map: map});
-      <% end %>
-    }
+  <% @cafes.each do |cafe| %>
+    var cafeLocation = {lat: <%= cafe.latitude %>, lng: <%= cafe.longitude %>};
+    var marker = new google.maps.Marker({position: cafeLocation, map: map});
+  <% end %>
+}
 
-    if (document.getElementById('map')) {
-      var script = document.createElement('script');
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA__TKlpHwteR_vPrQIpb18XURpKnqH_to&callback=initMap";
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.getElementById('map')) {
+    var script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA__TKlpHwteR_vPrQIpb18XURpKnqH_to&callback=initMap";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }
+});
 </script>
