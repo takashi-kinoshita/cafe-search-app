@@ -18,6 +18,8 @@
         <div class="card mb-4">
           <% if favorite.cafe.image.present? %>
             <%= image_tag favorite.cafe.image.url, class: 'card-img-top' %>
+          <% else %>
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= favorite.cafe.name %></h5>

@@ -47,6 +47,7 @@ gem "geocoder"
 gem "gmaps4rails"
 gem "webpacker"
 gem 'will_paginate', '~> 3.1'
+gem 'ransack'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
