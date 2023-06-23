@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "cafes#index"
   post 'guest_sign_in', to: 'users#guest_sign_in'
   resources :cafes do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:new, :create, :destroy]
     member do
       post 'add_to_favorites', to: 'favorites#create'
       delete 'remove_from_favorites', to: 'favorites#destroy'
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show]
   
-  resources :favorites, only: [:index]
+  resources :favorites, only: [:index, :create]
 
+  post 'api/favorites', to: 'favorites#create_via_api'
 end

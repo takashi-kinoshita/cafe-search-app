@@ -1,16 +1,13 @@
 <% content_for :title, 'カフェ一覧' %>
 
-<div id="map" style="height: 400px;"></div>
+<div id="map" class="map"></div>
 
 <div class="container my-5">
   <h1 class="mb-4">カフェ一覧</h1>
   
-  <%= form_with(url: cafes_path, method: :get, local: true) do %>
+  <%= form_with(id: "search_form", url: "#", method: :get, local: true) do %>
     <div class="form-group">
-      <%= text_field_tag :name, params[:name], placeholder: "カフェ名", class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= select_tag :location, options_for_select(["Tokyo", "Osaka", "Kyoto"], params[:location]), include_blank: true, class: 'form-control' %>
+      <%= text_field_tag :name, params[:name], placeholder: "カフェ名", id: "name", class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= submit_tag "検索", class: 'btn btn-primary' %>
@@ -21,14 +18,15 @@
     <% @cafes.each do |cafe| %>
       <div class="col-md-4">
         <div class="card mb-4">
-          <% if cafe.image.present? %>
-            <%= image_tag cafe.image.url, class: 'card-img-top' %>
+          <% if cafe.images.present? %>
+            <%= image_tag cafe.images.url, class: 'card-img-top', alt: "#{cafe.name}の画像" %>
           <% else %>
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="画像はありません">
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to cafe.name, cafe_path(cafe) %></h5>
             <p class="card-text"><%= truncate(cafe.description, length: 100) %></p>
+            <%= button_to 'お気に入り', add_to_favorites_cafe_path(cafe), method: :post, class: 'btn btn-primary' %>
           </div>
         </div>
       </div>
@@ -40,24 +38,4 @@
   </div>
 </div>
 
-<script>
-  function initMap() {
-  var centerLocation = {lat: 35.6895, lng: 139.6917};
-  var map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: centerLocation});
-
-  <% @cafes.each do |cafe| %>
-    var cafeLocation = {lat: <%= cafe.latitude %>, lng: <%= cafe.longitude %>};
-    var marker = new google.maps.Marker({position: cafeLocation, map: map});
-  <% end %>
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  if (document.getElementById('map')) {
-    var script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA__TKlpHwteR_vPrQIpb18XURpKnqH_to&callback=initMap";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  }
-});
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>

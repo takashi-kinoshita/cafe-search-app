@@ -3,7 +3,7 @@
     <div class="col-md-4">
       <h2><%= @user.name %>さんのプロフィール</h2>
       <div class="mt-4">
-        <img class="img-fluid rounded-circle" src="<%= @user.avatar_url %>" alt="ユーザーアバター">
+        <img class="img-fluid rounded-circle" src="<%= @user.avatar_was %>" alt="ユーザーアバター">
       </div>
     </div>
 
@@ -15,12 +15,12 @@
       </div>
 
       <div class="mt-4">
-        <h3>投稿</h3>
-        <% @user.posts.each do |post| %>
+        <h3>レビュー</h3>
+        <% @user.reviews.each do |review| %>
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"><%= post.title %></h5>
-              <p class="card-text"><%= post.body %></p>
+              <h5 class="card-title"><%= review.title %></h5>
+              <p class="card-text"><%= review.body %></p>
             </div>
           </div>
         <% end %>

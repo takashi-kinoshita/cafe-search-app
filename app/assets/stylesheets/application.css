@@ -13,32 +13,33 @@
  *= require_tree .
  *= require_self
  */
-@import 'bootstrap/dist/css/bootstrap.min.css';
-body {
-  font-family: 'Arial', sans-serif;
-}
-
-.navbar-brand {
-  font-size: 1.5em;
-}
-
-.card-img-top {
-  height: 200px;
-  object-fit: cover;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.btn-primary {
-  background-color: #6d4c41;
-  border-color: #6d4c41;
-}
-
-.btn-primary:hover {
-  background-color: #503a30;
-  border-color: #503a30;
-}
+ @import 'bootstrap/dist/css/bootstrap.min.css';
+ body {
+   font-family: 'Arial', sans-serif;
+ }
+ 
+ .navbar-brand {
+   font-size: 1.5em;
+ }
+ 
+ .card-img-top {
+   height: 200px;
+   object-fit: cover;
+ }
+ 
+ .footer {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+ }
+ 
+ .btn-primary {
+   background-color: #6d4c41;
+   border-color: #6d4c41;
+ }
+ 
+ .btn-primary:hover {
+   background-color: #503a30;
+   border-color: #503a30;
+ }
+ 

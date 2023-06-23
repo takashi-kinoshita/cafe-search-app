@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_053441) do
-  create_table "caves", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_06_21_093706) do
+  create_table "cafes", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.float "latitude"
@@ -22,6 +22,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_053441) do
     t.string "images"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "phone_number"
+    t.string "website"
   end
 
   create_table "favorites", force: :cascade do |t|

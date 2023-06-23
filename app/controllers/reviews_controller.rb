@@ -7,28 +7,34 @@ class ReviewsController < ApplicationController
     @review = @cafe.reviews.build(review_params)
     @review.user_id = current_user.id
     if @review.save
-      redirect_to @cafe
+      redirect_to @cafe, notice: 'レビューが作成されました'
     else
-      flash.now[:error] = "Review could not be saved."
+      flash.now[:error] = "レビューを保存できませんでした"
       render :new
     end
   end
 
+  def new
+    @cafe = Cafe.find(params[:cafe_id])
+    @review = Review.new
+  end
+  
   def edit
+    
   end
 
   def update
     if @review.update(review_params)
-      redirect_to @review.cafe
+      redirect_to @review.cafe, notice: 'レビューが更新されました'
     else
-      flash.now[:error] = "Review could not be updated."
+      flash.now[:error] = "レビューを更新できませんでした"
       render :edit
     end
   end
 
   def destroy
     @review.destroy
-    redirect_to @review.cafe
+    redirect_to @review.cafe, notice: 'レビューが削除されました'
   end
 
   private
@@ -42,6 +48,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:content)
+    params.require(:review).permit(:title, :body)
   end
 end

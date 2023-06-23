@@ -3,8 +3,8 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-md-6">
-      <% if @cafe.image.present? %>
-        <%= image_tag @cafe.image.url, class: 'img-fluid' %>
+      <% if @cafe.images.present? %>
+        <%= image_tag @cafe.images.url, class: 'img-fluid' %>
       <% else %>
         <img src="https://via.placeholder.com/300" class="img-fluid" alt="No Image">
       <% end %>
@@ -22,27 +22,35 @@
       <div class="my-4">
         <%= link_to '一覧に戻る', cafes_path, class: 'btn btn-secondary' %>
       </div>
+      
+      <%= link_to "新しいレビューを書く", new_cafe_review_path(@cafe), class: "btn btn-primary mb-3" %>
+      
     </div>
   </div>
 
   <h3 class="mt-5">Location on Map</h3>
-  <div id="map"></div>
+  <div id="map" style="height: 400px;"></div>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    function initMap() {
-      var myPlace = {lat: <%= @cafe.latitude %>, lng: <%= @cafe.longitude %>};
-      var map = new google.maps.Map(document.getElementById('map'), {zoom: 15, center: myPlace});
-      var marker = new google.maps.Marker({position: myPlace, map: map});
-    }
+  var latitude = <%= raw @cafe.latitude %>;
+  var longitude = <%= raw @cafe.longitude %>;
 
-    if (document.getElementById('map')) {
-      var script = document.createElement('script');
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA__TKlpHwteR_vPrQIpb18XURpKnqH_to&callback=initMap";
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-  });
+  function initMap() {
+    var cafeLocation = {lat: latitude, lng: longitude};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: cafeLocation
+    });
+
+    var marker = new google.maps.Marker({
+      position: cafeLocation,
+      map: map
+    });
+  }
+</script>
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA__TKlpHwteR_vPrQIpb18XURpKnqH_to&libraries=places&callback=initMap">
 </script>
